@@ -1,0 +1,29 @@
+version: '3.4'
+
+services:
+  sc.user.api:
+    image: ${DOCKER_REGISTRY-}scuserapi
+    build:
+      context: .
+      dockerfile: SC.User.Api/Dockerfile
+
+  sc.phone.api:
+    image: ${DOCKER_REGISTRY-}scphoneapi
+    build:
+      context: .
+      dockerfile: SC.Phone.Api/Dockerfile
+
+
+  sc.tracker.api:
+    image: ${DOCKER_REGISTRY-}sctrackerapi
+    build:
+      context: .
+      dockerfile: SC.Tracker.Api/Dockerfile
+
+
+  sc.notifier.api:
+    image: ${DOCKER_REGISTRY-}scnotifierapi
+    build:
+      context: .
+      dockerfile: SC.Notifier.Api/Dockerfile
+

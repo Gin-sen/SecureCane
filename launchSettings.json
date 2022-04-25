@@ -1,0 +1,17 @@
+{
+  "profiles": {
+    "Docker Compose": {
+      "commandName": "DockerCompose",
+      "composeLaunchAction": "LaunchBrowser",
+      "composeLaunchServiceName": "sc.user.api",
+      "composeLaunchUrl": "{Scheme}://localhost:{ServicePort}/swagger",
+      "commandVersion": "1.0",
+      "serviceActions": {
+        "sc.notifier.api": "StartDebugging",
+        "sc.phone.api": "StartDebugging",
+        "sc.tracker.api": "StartDebugging",
+        "sc.user.api": "StartDebugging"
+      }
+    }
+  }
+}
