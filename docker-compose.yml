@@ -1,17 +1,21 @@
 version: '3.4'
 
 services:
-  sc.user.api:
+  SC.UserManagment.api:
     image: ${DOCKER_REGISTRY-}scuserapi
     build:
       context: .
-      dockerfile: SC.User.Api/Dockerfile
+      dockerfile: SC.UserManagment.Api/Dockerfile
+    networks:
+      - backend-net
 
   sc.phone.api:
     image: ${DOCKER_REGISTRY-}scphoneapi
     build:
       context: .
       dockerfile: SC.Phone.Api/Dockerfile
+    networks:
+      - backend-net
 
 
   sc.tracker.api:
@@ -19,6 +23,8 @@ services:
     build:
       context: .
       dockerfile: SC.Tracker.Api/Dockerfile
+    networks:
+      - backend-net
 
 
   sc.notifier.api:
@@ -26,4 +32,43 @@ services:
     build:
       context: .
       dockerfile: SC.Notifier.Api/Dockerfile
+    networks:
+      - backend-net
+
+      
+  local.azurite:
+    image: mcr.microsoft.com/azure-storage/azurite
+    container_name: localazurite
+    restart: unless-stopped
+    command:
+      - "azurite"
+      - "--queueHost"
+      - "0.0.0.0"
+      - "--blobHost"
+      - "0.0.0.0"
+      - "--tableHost"
+      - "0.0.0.0"
+      - "--disableProductStyleUrl"
+    networks:
+      - backend-net
+
+  local.redis:
+    image: redis
+    container_name: localredis
+    hostname: localredis
+    restart: unless-stopped
+    networks:
+      - backend-net
+
+  sc.socketserver.api:
+    image: ${DOCKER_REGISTRY-}scsocketserverapi
+    build:
+      context: .
+      dockerfile: SC.SocketServer.Api/Dockerfile
+    networks:
+      - backend-net
+
+
+networks:
+  backend-net:
 

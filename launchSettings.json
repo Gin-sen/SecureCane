@@ -3,14 +3,49 @@
     "Docker Compose": {
       "commandName": "DockerCompose",
       "composeLaunchAction": "LaunchBrowser",
-      "composeLaunchServiceName": "sc.user.api",
+      "composeLaunchServiceName": "SC.UserManagment.api",
       "composeLaunchUrl": "{Scheme}://localhost:{ServicePort}/swagger",
       "commandVersion": "1.0",
       "serviceActions": {
         "sc.notifier.api": "StartDebugging",
         "sc.phone.api": "StartDebugging",
         "sc.tracker.api": "StartDebugging",
-        "sc.user.api": "StartDebugging"
+        "SC.UserManagment.api": "StartDebugging",
+        "local.azurite": "StartWithoutDebugging",
+        "local.redis": "StartWithoutDebugging",
+        "sc.socketserver.api": "StartDebugging"
+      }
+    },
+    "Docker Compose Client": {
+      "commandName": "DockerCompose",
+      "composeLaunchAction": "LaunchBrowser",
+      "composeLaunchServiceName": "sc.socketserver.api",
+      "composeLaunchUrl": "{Scheme}://localhost:{ServicePort}/swagger",
+      "commandVersion": "1.0",
+      "serviceActions": {
+        "local.azurite": "DoNotStart",
+        "local.redis": "DoNotStart",
+        "sc.notifier.api": "DoNotStart",
+        "sc.phone.api": "DoNotStart",
+        "sc.socketserver.api": "StartDebugging",
+        "sc.tracker.api": "DoNotStart",
+        "SC.UserManagment.api": "DoNotStart"
+      }
+    },
+    "Docker Compose UsersAPI": {
+      "commandName": "DockerCompose",
+      "composeLaunchAction": "LaunchBrowser",
+      "composeLaunchServiceName": "SC.UserManagment.api",
+      "composeLaunchUrl": "{Scheme}://localhost:{ServicePort}/swagger",
+      "commandVersion": "1.0",
+      "serviceActions": {
+        "local.azurite": "StartWithoutDebugging",
+        "local.redis": "StartWithoutDebugging",
+        "sc.notifier.api": "DoNotStart",
+        "sc.phone.api": "DoNotStart",
+        "sc.socketserver.api": "DoNotStart",
+        "sc.tracker.api": "DoNotStart",
+        "SC.UserManagment.api": "StartDebugging"
       }
     }
   }
