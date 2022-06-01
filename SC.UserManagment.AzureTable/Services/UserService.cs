@@ -28,12 +28,16 @@ namespace SC.UserManagment.AzureTable.Services
 
     public async Task<CreateUserResultModel> CreateUserAsync(User user)
     {
-      var res = await _userRepository.CreateUserAsync(user);
-      return null;
+      User res = await _userRepository.CreateUserAsync(user);
+      return new CreateUserResultModel()
+      {
+        UserId = res.UserId,
+        GroupId = res.GroupId
+      };
 
     }
 
-    public Task<DeleteUserResultModel> DeleteUserAsync(Guid guid)
+    public Task<DeleteUserResultModel> DeleteUserAsync(Guid groupId, Guid userId)
     {
       throw new NotImplementedException();
     }
@@ -43,14 +47,46 @@ namespace SC.UserManagment.AzureTable.Services
       throw new NotImplementedException();
     }
 
-    public Task<GetUserResultModel> GetUserAsync(Guid guid)
+    public async Task<GetUserResultModel> GetUserAsync(Guid groupId, Guid userId)
     {
-      throw new NotImplementedException();
+      var res = await _userRepository.GetUserAsync(groupId.ToString(), userId.ToString());
+      return new GetUserResultModel()
+      {
+        GroupId = res.GroupId,
+        UserId = res.UserId,
+        Login = res.Login,
+        Email = res.Email,
+        Phone = res.Phone,
+        FirstName = res.FirstName,
+        LastName = res.LastName,
+        CreatedAt = res.CreatedAt,
+        UpdatedAt = res.UpdatedAt
+      };
     }
 
-    public Task<GetUsersResultModel> GetUsersAsync()
+    public async Task<GetUsersResultModel> GetUsersAsync(Guid groupId)
     {
-      throw new NotImplementedException();
+      var res = await _userRepository.GetUsersAsync(groupId.ToString());
+      GetUsersResultModel resultModel = new GetUsersResultModel()
+      {
+        Users = new List<GetUserResultModel>()
+      };
+      foreach(User user in res)
+      {
+        resultModel.Users.Add(new GetUserResultModel()
+        {
+          GroupId = user.GroupId,
+          UserId = user.UserId,
+          Login = user.Login,
+          Email = user.Email,
+          Phone = user.Phone,
+          FirstName = user.FirstName,
+          LastName = user.LastName,
+          CreatedAt = user.CreatedAt,
+          UpdatedAt = user.UpdatedAt
+        });
+      }
+      return resultModel;
     }
 
     public Task<UpdateUserResultModel> UpdateUserAsync(User user)

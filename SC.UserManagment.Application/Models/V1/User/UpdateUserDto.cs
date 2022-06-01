@@ -12,7 +12,7 @@ namespace SC.UserManagment.Application.Models.V1.User
   public class UpdateUserDto
   {
     /*/// <summary>
-    /// Login (là a titre indicatif, le login étant une clé de la table Azure (RowKey))
+    /// Login 
     /// </summary>
     [JsonPropertyName("login")]
     public string Login { get; set; }*/

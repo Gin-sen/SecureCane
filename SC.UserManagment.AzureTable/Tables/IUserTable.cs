@@ -9,9 +9,9 @@ namespace SC.UserManagment.AzureTable.Tables
 {
   public interface IUserTable
   {
-    Task<List<UserEntity>> GetEntitiesAsync(string userId, string groupId);
+    Task<List<UserEntity>> GetEntitiesAsync(string groupId);
     Task<UserEntity> GetEntityAsync(string userId, string groupId);
     Task<UserEntity> UpsertEntityAsync(UserEntity entity);
-    Task DeleteEntityAsync(string id);
+    Task DeleteEntityAsync(string userId, string groupId);
   }
 }

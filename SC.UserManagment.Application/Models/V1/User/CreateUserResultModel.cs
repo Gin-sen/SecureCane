@@ -13,6 +13,12 @@ namespace SC.UserManagment.Application.Models.V1.User
     /// <summary>
     /// 
     /// </summary>
+    [JsonPropertyName("groupId")]
+    public Guid GroupId { get; set; }
+
+    /// <summary>
+    /// 
+    /// </summary>
     [JsonPropertyName("userId")]
     public Guid UserId { get; set; }
   }

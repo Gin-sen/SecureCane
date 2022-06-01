@@ -17,48 +17,30 @@ namespace SC.UserManagment.AzureTable.Tables
     public UserTable(string tableName, string storageConnectionString)
       : base(tableName, storageConnectionString) { }
 
-    public Task DeleteEntityAsync(string id)
-    {
-      throw new NotImplementedException();
-    }
-
-    public async Task<List<UserEntity>> GetEntitiesAsync(string userId, string groupId)
+    public async Task DeleteEntityAsync(string userId, string groupId)
     {
       var tableClient = await GetTableClient();
-      var awaitableResult = tableClient.QueryAsync<UserEntity>($"PartitionKey -eq {groupId} && RowKey -eq {userId}");
-      CancellationToken cancellationToken = default;
-      var res = awaitableResult.AsPages().GetAsyncEnumerator(cancellationToken);
+      await tableClient.DeleteEntityAsync(groupId, userId);
+    }
 
-      List<UserEntity> arrayRes = new List<UserEntity>();
-      do
+    public async Task<List<UserEntity>> GetEntitiesAsync(string groupId)
+    {
+      var tableClient = await GetTableClient();
+      AsyncPageable<UserEntity> awaitableResult = tableClient.QueryAsync<UserEntity>(TableClient.CreateQueryFilter($"PartitionKey eq {groupId}"));
+      List<UserEntity> result = new List<UserEntity>();
+      await foreach (UserEntity user in awaitableResult)
       {
-        foreach (var e in res.Current.Values.ToArray())
-          arrayRes.Append(e);
-        if (res.Current.ContinuationToken != null)
-          break;
-        await res.MoveNextAsync();
-      } while (res.Current.ContinuationToken != null);
-      return null;
+        result.Add(user);
+      }
+      return result;
     }
 
 
     public async Task<UserEntity> GetEntityAsync(string userId, string groupId)
     {
       var tableClient = await GetTableClient();
-      var awaitableResult = tableClient.QueryAsync<UserEntity>($"PartitionKey -eq {groupId} && RowKey -eq {userId}");
-      CancellationToken cancellationToken = default;
-      var res = awaitableResult.AsPages().GetAsyncEnumerator(cancellationToken);
-
-      List<UserEntity> arrayRes = new List<UserEntity>();
-      do
-      {
-        foreach (var e in res.Current.Values.ToArray())
-          arrayRes.Append(e);
-        if (res.Current.ContinuationToken != null)
-          break;
-        await res.MoveNextAsync();
-      } while (res.Current.ContinuationToken != null);
-      return null;
+      var awaitableResult = await tableClient.GetEntityAsync<UserEntity>(groupId, userId);
+      return awaitableResult.Value;
     }
 
     public async Task<UserEntity> UpsertEntityAsync(UserEntity entity)

@@ -32,7 +32,7 @@ namespace SC.UserManagment.Application.Queries.GetUser
     /// <returns></returns>
     public async Task<GetUserResultModel> RetrieveAsync(GetUserQuery query)
     {
-      return await _userService.GetUserAsync(query.Guid);
+      return await _userService.GetUserAsync(query.GroupId, query.UserId);
     }
   }
 }

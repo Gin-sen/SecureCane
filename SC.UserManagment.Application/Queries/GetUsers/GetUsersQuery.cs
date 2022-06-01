@@ -10,5 +10,10 @@ namespace SC.UserManagment.Application.Queries.GetUsers
   /// </summary>
   public class GetUsersQuery : IQuery
   {
+
+    /// <summary>
+    /// 
+    /// </summary>
+    public Guid GroupId { get; set; }
   }
 }

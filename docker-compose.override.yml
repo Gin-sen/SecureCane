@@ -12,16 +12,6 @@ services:
     volumes:
       - ${APPDATA}/Microsoft/UserSecrets:/root/.microsoft/usersecrets:ro
       - ${APPDATA}/ASP.NET/Https:/root/.aspnet/https:ro
-  sc.phone.api:
-    environment:
-      - ASPNETCORE_ENVIRONMENT=Development
-      - ASPNETCORE_URLS=https://+:443;http://+:80
-    ports:
-      - "80"
-      - "443"
-    volumes:
-      - ${APPDATA}/Microsoft/UserSecrets:/root/.microsoft/usersecrets:ro
-      - ${APPDATA}/ASP.NET/Https:/root/.aspnet/https:ro
 
   sc.tracker.api:
     environment:
@@ -48,9 +38,9 @@ services:
       
   local.azurite:
     ports:
-      - "10000"
-      - "10001"
-      - "10002"
+      - "10000:10000"
+      - "10001:10001"
+      - "10002:10002"
 
   local.redis:
     ports:

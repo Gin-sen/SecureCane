@@ -9,15 +9,6 @@ services:
     networks:
       - backend-net
 
-  sc.phone.api:
-    image: ${DOCKER_REGISTRY-}scphoneapi
-    build:
-      context: .
-      dockerfile: SC.Phone.Api/Dockerfile
-    networks:
-      - backend-net
-
-
   sc.tracker.api:
     image: ${DOCKER_REGISTRY-}sctrackerapi
     build:

@@ -38,13 +38,13 @@ public class UserController : ControllerBase
   /// Test de GET
   /// </summary>
   /// <returns></returns>
-  [HttpGet]
+  [HttpGet("{groupId}")]
   [Produces("application/json")]
   [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(GetUsersResultModel))]
   [ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(ErrorResponseResultModel))]
-  public async Task<IActionResult> GetAllUsers()
+  public async Task<IActionResult> GetAllUsersFromGroup([FromRoute, Required] Guid groupId)
   {
-    return Ok(await _dispatcher.GetResultAsync<GetUsersQuery, GetUsersResultModel>(new GetUsersQuery()));
+    return Ok(await _dispatcher.GetResultAsync<GetUsersQuery, GetUsersResultModel>(new GetUsersQuery() { GroupId = groupId }));
   }
 
 
@@ -70,20 +70,20 @@ public class UserController : ControllerBase
   /// Test de GET
   /// </summary>
   /// <returns></returns>
-  [HttpGet("{guid}")]
+  [HttpGet("{groupId}/{userId}")]
   [Produces("application/json")]
   [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(GetUserResultModel))]
   [ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(ErrorResponseResultModel))]
-  public async Task<IActionResult> GetUser([FromRoute, Required] Guid guid)
+  public async Task<IActionResult> GetUser([FromRoute, Required] Guid groupId, [FromRoute, Required] Guid userId)
   {
-    return Ok(await _dispatcher.GetResultAsync<GetUserQuery, GetUserResultModel>(new GetUserQuery() { Guid = guid }));
+    return Ok(await _dispatcher.GetResultAsync<GetUserQuery, GetUserResultModel>(new GetUserQuery() { GroupId = groupId, UserId = userId }));
   }
 
   /// <summary>
   /// Update user in AzureTable
   /// </summary>
   /// <returns></returns>
-  [HttpPut("{guid}")]
+  [HttpPut("{groupId}")]
   [Produces("application/json")]
   [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(UpdateUserResultModel))]
   [ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(ErrorResponseResultModel))]
@@ -102,13 +102,13 @@ public class UserController : ControllerBase
   /// Delete user in AzureTable
   /// </summary>
   /// <returns></returns>
-  [HttpDelete("{guid}")]
+  [HttpDelete("{groupId}/{userId}")]
   [Produces("application/json")]
   [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(DeleteUserResultModel))]
   [ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(ErrorResponseResultModel))]
-  public async Task<IActionResult> DeleteUser([FromRoute, Required] Guid guid)
+  public async Task<IActionResult> DeleteUser([FromRoute, Required] Guid groupId, [FromRoute, Required] Guid userId)
   {
-    return Ok(await _dispatcher.SendAsync<DeleteUserCommand, DeleteUserResultModel>(new DeleteUserCommand() { Guid = guid }));
+    return Ok(await _dispatcher.SendAsync<DeleteUserCommand, DeleteUserResultModel>(new DeleteUserCommand() { UserId = groupId }));
   }
 
 }

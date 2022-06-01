@@ -14,6 +14,11 @@ namespace SC.UserManagment.Application.Commands.DeleteUser
     /// <summary>
     /// 
     /// </summary>
-    public Guid Guid { get; set; }
+    public Guid UserId { get; set; }
+
+    /// <summary>
+    /// 
+    /// </summary>
+    public Guid GroupId { get; set; }
   }
 }

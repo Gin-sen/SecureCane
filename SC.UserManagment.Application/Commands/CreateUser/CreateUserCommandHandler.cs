@@ -59,7 +59,7 @@ namespace SC.UserManagment.Application.Commands.CreateUser
         }
       };
       return new CommandResult<CreateUserResultModel>(result, e);*/
-      return new CommandResult<CreateUserResultModel>(result, null);
+      return new CommandResult<CreateUserResultModel>(result);
     }
   }
 }

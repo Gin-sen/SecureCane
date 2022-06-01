@@ -3,9 +3,12 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
 using SC.Common.CQRS;
 using SC.Common.CQRS.Commands;
+using SC.Common.CQRS.Queries;
 using SC.UserManagment.Api.Helpers;
 using SC.UserManagment.Application.Commands.CreateUser;
 using SC.UserManagment.Application.Models.V1.User;
+using SC.UserManagment.Application.Queries.GetUser;
+using SC.UserManagment.Application.Queries.GetUsers;
 using SC.UserManagment.Application.Repositories;
 using SC.UserManagment.Application.Services;
 using SC.UserManagment.AzureTable.Repositories;
@@ -57,7 +60,9 @@ namespace SC.UserManagment.Api.Startup
       builder.Services.AddScoped<ICommandHandlerAsync<CreateUserCommand, CreateUserResultModel>, CreateUserCommandHandler>();
 
       //  Queries
-
+      builder.Services.AddScoped<IQueryHandlerAsync<GetUserQuery, GetUserResultModel>, GetUserQueryHandler>();
+      builder.Services.AddScoped<IQueryHandlerAsync<GetUsersQuery, GetUsersResultModel>, GetUsersQueryHandler>();
+      
       //  Events
 
       // Swagger

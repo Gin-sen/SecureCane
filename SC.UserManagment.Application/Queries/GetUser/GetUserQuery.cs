@@ -13,6 +13,11 @@ namespace SC.UserManagment.Application.Queries.GetUser
     /// <summary>
     /// 
     /// </summary>
-    public Guid Guid { get; set; }
+    public Guid GroupId { get; set; }
+
+    /// <summary>
+    /// 
+    /// </summary>
+    public Guid UserId { get; set; }
   }
 }

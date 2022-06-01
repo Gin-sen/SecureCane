@@ -29,9 +29,11 @@ namespace SC.UserManagment.AzureTable.Repositories
 
     public async Task<User> CreateUserAsync(User user)
     {
-      UserEntity entity = new UserEntity(DateTimeOffset.UtcNow, user.CreatedAt, new Azure.ETag(), user.Email, user.FirstName);
+      UserEntity entity = new UserEntity(user.GroupId, DateTimeOffset.UtcNow, DateTimeOffset.UtcNow, user.Email, user.FirstName, user.LastName,user.Login, user.Phone);
       await _userTable.UpsertEntityAsync(entity);
-      return null;
+      user.GroupId = Guid.Parse(entity.PartitionKey);
+      user.UserId = Guid.Parse(entity.RowKey);
+      return user;
     }
 
     public Task DeleteAllUsersAsync()
@@ -39,19 +41,48 @@ namespace SC.UserManagment.AzureTable.Repositories
       throw new NotImplementedException();
     }
 
-    public Task<User> DeleteUserAsync(Guid guid)
+    public Task<User> DeleteUserAsync(string groupId, string userId)
     {
       throw new NotImplementedException();
     }
 
-    public Task<User> GetUserAsync(Guid guid)
+    public async Task<User> GetUserAsync(string groupId, string userId)
     {
-      throw new NotImplementedException();
+      var res = await _userTable.GetEntityAsync(userId, groupId);
+      return new User()
+      {
+        GroupId = Guid.Parse(res.PartitionKey),
+        UserId = Guid.Parse(res.RowKey),
+        Login = res.Login,
+        Email = res.Email,
+        Phone = res.Phone,
+        FirstName = res.FirstName,
+        LastName = res.LastName,
+        CreatedAt = res.CreatedAt,
+        UpdatedAt = res.Timestamp
+      };
     }
 
-    public Task<List<User>> GetUsersAsync()
+    public async Task<List<User>> GetUsersAsync(string groupId)
     {
-      throw new NotImplementedException();
+      var res = await _userTable.GetEntitiesAsync(groupId);
+      List<User> users = new List<User>();
+      foreach (UserEntity userEntity in res)
+      {
+        users.Add(new User()
+        {
+          GroupId = Guid.Parse(userEntity.PartitionKey),
+          UserId = Guid.Parse(userEntity.RowKey),
+          Login = userEntity.Login,
+          Email = userEntity.Email,
+          Phone = userEntity.Phone,
+          FirstName = userEntity.FirstName,
+          LastName = userEntity.LastName,
+          CreatedAt = userEntity.CreatedAt,
+          UpdatedAt = userEntity.Timestamp
+        });
+      }
+      return users;
     }
 
     public Task<bool> IsExistAsync(Guid guid)

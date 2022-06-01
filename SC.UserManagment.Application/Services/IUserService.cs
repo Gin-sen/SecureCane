@@ -22,15 +22,17 @@ namespace SC.UserManagment.Application.Services
     /// <summary>
     /// 
     /// </summary>
-    /// <param name="guid"></param>
+    /// <param name="groupId"></param>
+    /// <param name="userId"></param>
     /// <returns></returns>
-    Task<GetUserResultModel> GetUserAsync(Guid guid);
+    Task<GetUserResultModel> GetUserAsync(Guid groupId, Guid userId);
 
     /// <summary>
     /// 
     /// </summary>
+    /// <param name="groupId"></param>
     /// <returns></returns>
-    Task<GetUsersResultModel> GetUsersAsync();
+    Task<GetUsersResultModel> GetUsersAsync(Guid groupId);
 
     /// <summary>
     /// 
@@ -43,9 +45,10 @@ namespace SC.UserManagment.Application.Services
     /// <summary>
     /// 
     /// </summary>
-    /// <param name="guid"></param>
+    /// <param name="groupId"></param>
+    /// <param name="userId"></param>
     /// <returns></returns>
-    Task<DeleteUserResultModel> DeleteUserAsync(Guid guid);
+    Task<DeleteUserResultModel> DeleteUserAsync(Guid groupId, Guid userId);
 
     /// <summary>
     /// 

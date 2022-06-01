@@ -8,7 +8,6 @@
       "commandVersion": "1.0",
       "serviceActions": {
         "sc.notifier.api": "StartDebugging",
-        "sc.phone.api": "StartDebugging",
         "sc.tracker.api": "StartDebugging",
         "SC.UserManagment.api": "StartDebugging",
         "local.azurite": "StartWithoutDebugging",
@@ -26,7 +25,6 @@
         "local.azurite": "DoNotStart",
         "local.redis": "DoNotStart",
         "sc.notifier.api": "DoNotStart",
-        "sc.phone.api": "DoNotStart",
         "sc.socketserver.api": "StartDebugging",
         "sc.tracker.api": "DoNotStart",
         "SC.UserManagment.api": "DoNotStart"
@@ -42,7 +40,6 @@
         "local.azurite": "StartWithoutDebugging",
         "local.redis": "StartWithoutDebugging",
         "sc.notifier.api": "DoNotStart",
-        "sc.phone.api": "DoNotStart",
         "sc.socketserver.api": "DoNotStart",
         "sc.tracker.api": "DoNotStart",
         "SC.UserManagment.api": "StartDebugging"

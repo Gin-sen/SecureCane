@@ -35,15 +35,16 @@ namespace SC.UserManagment.Application.Repositories
     /// <summary>
     /// 
     /// </summary>
-    /// <param name="guid"></param>
+    /// <param name="groupId"></param>
+    /// <param name="userId"></param>
     /// <returns></returns>
-    Task<User> GetUserAsync(Guid guid);
+    Task<User> GetUserAsync(string groupId, string userId);
 
     /// <summary>
     /// 
     /// </summary>
     /// <returns></returns>
-    Task<List<User>> GetUsersAsync();
+    Task<List<User>> GetUsersAsync(string groupId);
 
     /// <summary>
     /// 
@@ -55,9 +56,10 @@ namespace SC.UserManagment.Application.Repositories
     /// <summary>
     /// 
     /// </summary>
-    /// <param name="guid"></param>
+    /// <param name="groupId"></param>
+    /// <param name="userId"></param>
     /// <returns></returns>
-    Task<User> DeleteUserAsync(Guid guid);
+    Task<User> DeleteUserAsync(string groupId, string userId);
 
     /// <summary>
     /// 

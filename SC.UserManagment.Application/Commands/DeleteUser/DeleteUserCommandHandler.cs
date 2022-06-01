@@ -31,7 +31,7 @@ namespace SC.UserManagment.Application.Commands.DeleteUser
     /// <returns></returns>
     public async Task<CommandResult<DeleteUserResultModel>> HandleAsync(DeleteUserCommand command)
     {
-      var res = await _userService.DeleteUserAsync(command.Guid);
+      var res = await _userService.DeleteUserAsync(command.GroupId, command.UserId);
 
       return new CommandResult<DeleteUserResultModel>(res, null);
     }

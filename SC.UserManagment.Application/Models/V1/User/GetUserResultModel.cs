@@ -13,6 +13,11 @@ namespace SC.UserManagment.Application.Models.V1.User
     /// <summary>
     /// UserId
     /// </summary>
+    [JsonPropertyName("groupId")]
+    public Guid GroupId { get; set; }
+    /// <summary>
+    /// UserId
+    /// </summary>
     [JsonPropertyName("userId")]
     public Guid UserId { get; set; }
 
@@ -30,8 +35,8 @@ namespace SC.UserManagment.Application.Models.V1.User
     /// <summary>
     /// Mail
     /// </summary>
-    [JsonPropertyName("mail")]
-    public string Mail { get; set; }
+    [JsonPropertyName("email")]
+    public string Email { get; set; }
 
     /// <summary>
     /// FirstName
@@ -55,12 +60,12 @@ namespace SC.UserManagment.Application.Models.V1.User
     /// 
     /// </summary>
     [JsonPropertyName("createdAt")]
-    public DateTime CreatedAt { get; set; }
+    public DateTimeOffset? CreatedAt { get; set; }
 
     /// <summary>
     /// 
     /// </summary>
     [JsonPropertyName("updatedAt")]
-    public DateTime UpdatedAt { get; set; }
+    public DateTimeOffset? UpdatedAt { get; set; }
   }
 }
