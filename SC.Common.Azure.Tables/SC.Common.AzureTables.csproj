@@ -8,12 +8,6 @@
 
   <ItemGroup>
     <PackageReference Include="Azure.Data.Tables" Version="12.5.0" />
-    <PackageReference Include="Azure.Storage.Common" Version="12.11.0" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <ProjectReference Include="..\SC.Common.Azure.Tables\SC.Common.AzureTables.csproj" />
-    <ProjectReference Include="..\SC.UserManagment.Application\SC.UserManagment.Application.csproj" />
   </ItemGroup>
 
 </Project>

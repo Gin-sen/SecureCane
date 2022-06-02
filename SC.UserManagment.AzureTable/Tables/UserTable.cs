@@ -1,7 +1,6 @@
 ﻿using Azure;
 using Azure.Data.Tables;
 using Microsoft.Extensions.Configuration;
-using SC.Common.AzureTable;
 using SC.Common.AzureTables;
 using SC.UserManagment.AzureTable.Entities;
 using System;
